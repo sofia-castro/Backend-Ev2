@@ -8,7 +8,7 @@ public interface ProductoRepository{
     public Producto createProducto(Producto Producto);
     public List<Producto> getProductos();  
     public Producto getProducto(Long id);
-    public Producto updateProducto(Producto Producto, Long codigo);
-    public boolean deleteProducto(Long codigo);
+    public Producto updateProducto(Producto Producto, Long id);
+    public boolean deleteProducto(Long id);
     
 }

@@ -3,10 +3,10 @@ import java.util.Date;
 
 public class Producto {
     private Long id;
-    private Long codigo;
+    private String codigo;
     private String nombre;
     private Date fecha_v;
-    private float precio;
+    private Float precio;
     private String categoria;
     private boolean deleted;
 
@@ -16,7 +16,7 @@ public class Producto {
         return id;
     }
     
-    public Long getCodigo(){
+    public String getCodigo(){
         return codigo;
     }
 
@@ -28,7 +28,7 @@ public class Producto {
          return fecha_v;
     }
 
-    public float getPrecio(){
+    public Float getPrecio(){
         return precio;
     }
     
@@ -46,7 +46,7 @@ public class Producto {
         this.id = id;
     }
     
-    public void setCodigo(Long cod){
+    public void setCodigo(String cod){
         this.codigo = cod;
     }
     

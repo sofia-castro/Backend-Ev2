@@ -43,7 +43,7 @@ public class ProductoService {
     }
 
     @PostMapping("/productos/create")
-    ResponseEntity<String> createproducto(@RequestBody String request){
+    ResponseEntity<String> createProducto(@RequestBody String request){
         Producto tarOut = gson.fromJson(request,Producto.class);
         if (tarOut != null){
             Producto tarOut2 = productoRepository.createProducto(tarOut);
@@ -56,30 +56,29 @@ public class ProductoService {
     @CrossOrigin(origins = {"http://localhost:8080"})
     @ResponseBody
     @RequestMapping(value ="/productos/{id}",  method =RequestMethod.PUT,consumes="application/json")
-    ResponseEntity<String> updateproducto(@RequestBody String request, @PathVariable Long id){
+    ResponseEntity<String> updateProducto(@RequestBody String request, @PathVariable Long id){
         Producto funciona=gson.fromJson(request,Producto.class);
-        Producto tarOut = productoRepository.getProducto(id);
-        
-        if(tarOut != null){
+        Producto prodOut = productoRepository.getProducto(id);
+        if(prodOut != null){
             if(funciona.getCodigo() != null){
-                tarOut.setCant_Voluntarios(funciona.getCant_Voluntarios());
+                prodOut.setCodigo(funciona.getCodigo());
             }
 
-            if(funciona.getTitulo() != null){
-                tarOut.setTitulo(funciona.getTitulo());
+            if(funciona.getNombre() != null){
+                prodOut.setNombre(funciona.getNombre());
             }
 
-            if(funciona.getDescripcion() != null){
-                tarOut.setDescripcion(funciona.getDescripcion());
+            if(funciona.getFecha_V() != null){
+                prodOut.setFecha_V(funciona.getFecha_V());
             }
-            if(funciona.getEmergenciaId() != null){
-                tarOut.setEmergenciaId(funciona.getEmergenciaId());
+            if(funciona.getCategoria() != null){
+                prodOut.setCategoria(funciona.getCategoria());
             }
-            if(funciona.getEstadoId() != null){
-                tarOut.setEstadoId(funciona.getEstadoId());
+            if(funciona.getPrecio()!= null){
+                prodOut.setPrecio(funciona.getPrecio());
             }
-            tarOut = productoRepository.updateproducto(tarOut, id);
-            return new ResponseEntity<>(gson.toJson(tarOut),HttpStatus.OK);
+            prodOut = productoRepository.updateProducto(prodOut, id);
+            return new ResponseEntity<>(gson.toJson(prodOut),HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
