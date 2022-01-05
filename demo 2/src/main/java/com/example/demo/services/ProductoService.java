@@ -1,0 +1,96 @@
+package com.example.demo.services;
+import com.example.demo.repositories.ProductoRepository;
+import com.example.demo.models.Producto;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+
+
+@CrossOrigin(origins = "*")
+@RestController
+public class ProductoService {
+    private final ProductoRepository productoRepository;
+    private final Gson gson;
+
+    ProductoService(ProductoRepository productoRepository){
+        this.gson = new GsonBuilder().create();
+        this.productoRepository = productoRepository;
+    }
+
+    @GetMapping("/productos/")
+    ResponseEntity<String> getProductos(){
+        List<Producto> productos = productoRepository.getProductos() ;
+        return new ResponseEntity<>(gson.toJson(productos),HttpStatus.OK);
+    }
+
+    @GetMapping("/productos/{id}")
+    ResponseEntity<String> getProducto(@PathVariable Long id){
+        Producto productos = productoRepository.getProducto(id);
+        if(productos != null){
+            return new ResponseEntity<>(gson.toJson(productos),HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @PostMapping("/productos/create")
+    ResponseEntity<String> createproducto(@RequestBody String request){
+        Producto tarOut = gson.fromJson(request,Producto.class);
+        if (tarOut != null){
+            Producto tarOut2 = productoRepository.createProducto(tarOut);
+            return new ResponseEntity<>(gson.toJson(tarOut2),HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    }
+
+
+    @CrossOrigin(origins = {"http://localhost:8080"})
+    @ResponseBody
+    @RequestMapping(value ="/productos/{id}",  method =RequestMethod.PUT,consumes="application/json")
+    ResponseEntity<String> updateproducto(@RequestBody String request, @PathVariable Long id){
+        Producto funciona=gson.fromJson(request,Producto.class);
+        Producto tarOut = productoRepository.getProducto(id);
+        
+        if(tarOut != null){
+            if(funciona.getCodigo() != null){
+                tarOut.setCant_Voluntarios(funciona.getCant_Voluntarios());
+            }
+
+            if(funciona.getTitulo() != null){
+                tarOut.setTitulo(funciona.getTitulo());
+            }
+
+            if(funciona.getDescripcion() != null){
+                tarOut.setDescripcion(funciona.getDescripcion());
+            }
+            if(funciona.getEmergenciaId() != null){
+                tarOut.setEmergenciaId(funciona.getEmergenciaId());
+            }
+            if(funciona.getEstadoId() != null){
+                tarOut.setEstadoId(funciona.getEstadoId());
+            }
+            tarOut = productoRepository.updateproducto(tarOut, id);
+            return new ResponseEntity<>(gson.toJson(tarOut),HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
+
+    @DeleteMapping("/productos/{id}")
+    ResponseEntity<String> deleteProducto(@PathVariable Long id){
+        if(productoRepository.deleteProducto(id)){
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+    
+}
