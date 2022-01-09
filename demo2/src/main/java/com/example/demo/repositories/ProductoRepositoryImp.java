@@ -58,7 +58,7 @@ public class ProductoRepositoryImp implements ProductoRepository{
 
     @Override
     public List<Producto> getProductos(){
-        String query = "select * from Producto";
+        String query = "select * from Producto where  deleted = false";
         try(Connection conn = sql2o.open()){
             return conn.createQuery(query).executeAndFetch(Producto.class);
          }
