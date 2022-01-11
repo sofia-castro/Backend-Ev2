@@ -53,7 +53,7 @@ public class ProductoService {
     }
 
 
-    @CrossOrigin(origins = {"http://localhost:8080"})
+    @CrossOrigin(origins = {"http://localhost:8081"})
     @ResponseBody
     @RequestMapping(value ="/productos/{id}",  method =RequestMethod.PUT,consumes="application/json")
     ResponseEntity<String> updateProducto(@RequestBody String request, @PathVariable Long id){
