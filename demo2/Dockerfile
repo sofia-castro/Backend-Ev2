@@ -1,6 +1,5 @@
-FROM adoptopenjdk/openjdk11:ubi
-ENV APP_HOME=/usr/app/
-WORKDIR $APP_HOME
-COPY build/libs/*.jar
-EXPOSE 8080
-CMD ["java", "-jar", "demo-0.0.1-SNAPSHOT.jar"]
+FROM jenkins/jenkins:2.150.3
+EXPOSE 8081
+RUN ./gradlew bootrun && \ ./gradlew test
+ADD /Users/macbookair/Desktop/Backend-Ev2/demo2/build/libs/demo-0.0.1-SNAPSHOT.jar
+ENTRYPOINT ["java","-jar","demo-0.0.1-SNAPSHOT.jar"]
