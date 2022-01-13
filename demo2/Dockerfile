@@ -1,5 +1,5 @@
-FROM jenkins/jenkins:2.150.3
-EXPOSE 8081
-RUN ./gradlew bootrun && \ ./gradlew test
-ADD /Users/macbookair/Desktop/Backend-Ev2/demo2/build/libs/demo-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","demo-0.0.1-SNAPSHOT.jar"]
+FROM openjdk:11-oracle
+EXPOSE 8082
+ENV ARTIFACT_NAME=demo-0.0.1-SNAPSHOT.jar
+ENTRYPOINT exec java -jar ${ARTIFACT_NAME}
+COPY demo-0.0.1-SNAPSHOT.jar /demo-0.0.1-SNAPSHOT.jar
