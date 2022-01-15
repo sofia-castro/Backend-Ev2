@@ -1,24 +1,17 @@
 node{
-    def app
     checkout scm
     environment {
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
     }
     sh 'echo "ayudaaaa"'
     stage('Contruir imagen docker'){
-            steps{
+           
                 dir("/var/lib/jenkins/workspace/Tingeso/demo2"){
                      sh 'docker build . -t back'    
                  }
-            }             
+                       
         }
 
-       stage("run") {
-                app.inside {
-                    sh "ayudaaaa"
-
-                }
-          }
     
 
 }
