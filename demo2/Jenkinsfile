@@ -2,17 +2,15 @@ node{
     def app
     sh 'echo "ayudaaaa"'
          stage("build") {
-       
-                   app= docker.build("demo2/Dockerfile") 
-                   sh 'echo "ayudaaaa"'
+                   sh 'echo "ayudaaaa2"'
+                   sh 'docker build --build-arg JAR_FILE=build/libs/\*.jar -t demo .'
+                   sh 'echo "ayudaaaa3"'
        
          }
 
-          stage("Test image") {
-                app.inside {
-                    sh 'echo "ayudaaaa"'
-                
-                }
+          stage("run") {
+                 sh 'docker run -it -p 8081:8081 demo'
+                 sh 'echo "ayudaaaa4"'
           }
-    
+        
 }
