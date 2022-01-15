@@ -1,4 +1,5 @@
 node{
+    agent any
     checkout scm
     sh 'echo "ayudaaaa"'
          stage("build") {
