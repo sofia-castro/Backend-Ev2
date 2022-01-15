@@ -2,9 +2,7 @@ node{
     checkout scm
     sh 'echo "ayudaaaa"'
     stage("build") {
-                   sh 'echo "ayudaaaa2"'
-           
-                   
+                   sh 'echo "ayudaaaa2"
                    sh """ docker build --build-arg JAR_FILE=build/libs/\\*.jar -t demo ."""
                    sh 'echo "ayudaaaa3"'
                   
