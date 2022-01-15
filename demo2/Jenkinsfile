@@ -2,7 +2,7 @@ pipeline{
     agent any
     stages("run") {
         
-        sh "docker run -it -p 8081:8081 demo"
+        bat "docker run -it -p 8081:8081 demo"
       
     }
 }
