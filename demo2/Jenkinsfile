@@ -1,22 +1,20 @@
 node{
-    def app
     checkout scm
-    environment {
-        DOCKERHUB_CREDENTIALS=credentials('dockerhub')
-    }
     sh 'echo "ayudaaaa"'
     stage("build") {
-       dir ('demo2') {
-       app= docker.build("demo2/Dockerfile") 
+                   sh 'echo "ayudaaaa2"'
+              
+                   
+                   sh """ docker build --build-arg JAR_FILE=build/libs/\\*.jar -t demo ."""
 
-       }
-     }
-     stage("run"){
-    docker.image('demo').withRun('-p 8081:8081') { c ->
-        /* Wait until mysql service is up */
-        /* Run some tests which require MySQL */
-        sh 'make check'
-    }
-     }
+                   sh 'echo "ayudaaaa3"'
+                  
+       
+         }
+
+     stage("run") {
+                 sh 'docker run -it -p 8081:8081 demo'
+                 sh 'echo "ayudaaaa4"'
+          }
 
 }
