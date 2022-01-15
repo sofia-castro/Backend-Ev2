@@ -1,8 +1,8 @@
 pipeline{
     agent any
     stages("run") {
-        steps {
-             sh "docker run -it -p 8081:8081 demo"
-      }
+        
+        sh "docker run -it -p 8081:8081 demo"
+      
     }
 }
