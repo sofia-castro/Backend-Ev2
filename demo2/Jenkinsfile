@@ -4,13 +4,13 @@ pipeline{
          stage("build") {
                 steps {
        
-                      docker build --build-arg JAR_FILE=build/libs/\*.jar -t demo .
+                      'docker build --build-arg JAR_FILE=build/libs/\*.jar -t demo .'
        
                 }
          }
           stage("run") {
                 steps {
-                     docker run -it -p 8081:8081 demo
+                     'docker run -it -p 8081:8081 demo'
                 
                 }
           }
