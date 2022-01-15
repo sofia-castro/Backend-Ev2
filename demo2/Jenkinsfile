@@ -1,11 +1,18 @@
 pipeline{
     agent any
     stages {
+         stage("build") {
+                steps {
+       
+                      docker build --build-arg JAR_FILE=build/libs/\*.jar -t demo .
+       
+                }
+         }
           stage("run") {
-      steps {
-        sh """
-          docker run -it -p 8081:8081 demo
-        """
-      }
+                steps {
+                     docker run -it -p 8081:8081 demo
+                
+                }
+          }
     }
 }
