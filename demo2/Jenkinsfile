@@ -4,10 +4,18 @@ node{
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
     }
     sh 'echo "ayudaaaa"'
+    stage("build") {
+       dir ('demo2') {
+       app= docker.build("demo2/Dockerfile") 
+
+       }
+     }
+     stage("run"){
     docker.image('demo').withRun('-it -p 8081:8081') { c ->
         /* Wait until mysql service is up */
         /* Run some tests which require MySQL */
         sh 'make check'
     }
+     }
 
 }
