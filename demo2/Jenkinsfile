@@ -1,11 +1,12 @@
 node{
-    def app
+    agent none
     sh 'echo "ayudaaaa"'
          stage("build") {
                    sh 'echo "ayudaaaa2"'
+                   agent {
                    docker {
                     """ build --build-arg JAR_FILE=build/libs/\\*.jar -t demo ."""
-                   }
+                   }}
                    sh 'echo "ayudaaaa3"'
        
          }
