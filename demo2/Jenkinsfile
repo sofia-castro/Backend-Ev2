@@ -5,11 +5,9 @@ node{
     }
     sh 'echo "ayudaaaa"'
     stage('Docker Build'){
-            steps{
                 dir("/var/lib/jenkins/workspace/Tingeso/backend"){
                     sh 'docker build --build-arg JAR_FILE=build/libs/*.jar -t back .'
                 }        
-            }
         }
 
     
