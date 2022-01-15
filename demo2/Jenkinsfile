@@ -2,12 +2,11 @@ node{
     def app
     
          stage("build") {
-               dir ('demo2') {
        
                    app= docker.build("demo2/Dockerfile") 
        
-                }
          }
+
           stage("Test image") {
                 app.inside {
                     sh 'echo"ayudaaaa"'
