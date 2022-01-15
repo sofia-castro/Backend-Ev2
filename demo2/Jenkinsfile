@@ -1,16 +1,16 @@
 pipeline{
-    agent any
+    def app
     stages {
          stage("build") {
-                steps {
+               dir ('demo2') {
        
-                      'docker build --build-arg JAR_FILE=build/libs/\*.jar -t demo .'
+                   app= docker.build("demo2/Dockerfile") 
        
                 }
          }
           stage("run") {
-                steps {
-                     'docker run -it -p 8081:8081 demo'
+                app.inside {
+                    sh "ayudaaaa"
                 
                 }
           }
