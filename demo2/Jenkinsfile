@@ -5,12 +5,14 @@ node{
         DOCKERHUB_CREDENTIALS=credentials('dockerhub')
     }
     sh 'echo "ayudaaaa"'
-    stage("build") {
-      
-       app= docker.build("demo2/Dockerfile") 
+    stage('Contruir imagen docker'){
+            steps{
+                dir("/var/lib/jenkins/workspace/Backend-Ev2/demo2"){
+                     sh 'docker build . -t back'    
+                 }
+            }             
+        }
 
-       
-     }
        stage("run") {
                 app.inside {
                     sh "ayudaaaa"
