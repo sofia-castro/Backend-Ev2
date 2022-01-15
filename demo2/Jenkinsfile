@@ -1,19 +1,9 @@
 node{
-    agent none
-    sh 'echo "ayudaaaa"'
-         stage("build") {
-                   sh 'echo "ayudaaaa2"'
-                   agent {
-                   docker {
-                    """ build --build-arg JAR_FILE=build/libs/\\*.jar -t demo ."""
-                   }}
-                   sh 'echo "ayudaaaa3"'
-       
-         }
+       checkout scm
+    def testImage = docker.build("demo", "/demo2/Dockerfile") 
 
-          stage("run") {
-                 sh 'docker run -it -p 8081:8081 demo'
-                 sh 'echo "ayudaaaa4"'
-          }
+    testImage.inside {
+        sh 'make test'
+    }    
 
 }
