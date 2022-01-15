@@ -1,9 +1,10 @@
 node{
     def app
-    
+    sh 'echo"ayudaaaa"'
          stage("build") {
        
                    app= docker.build("demo2/Dockerfile") 
+                   sh 'echo"ayudaaaa"'
        
          }
 
