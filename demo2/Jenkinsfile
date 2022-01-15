@@ -1,5 +1,8 @@
 node{
     checkout scm
+    environment {
+        DOCKERHUB_CREDENTIALS=credentials('dockerhub')
+    }
     sh 'echo "ayudaaaa"'
     docker.image('demo').withRun('-it -p 8081:8081') { c ->
         /* Wait until mysql service is up */
