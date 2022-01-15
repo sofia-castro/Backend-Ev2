@@ -1,6 +1,6 @@
 node{
     def app
-    stages {
+    
          stage("build") {
                dir ('demo2') {
        
@@ -14,5 +14,5 @@ node{
                 
                 }
           }
-    }
+    
 }
