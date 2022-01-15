@@ -8,9 +8,9 @@ node{
        
                 }
          }
-          stage("run") {
+          stage("Test image") {
                 app.inside {
-                    sh "ayudaaaa"
+                    sh 'echo"ayudaaaa"'
                 
                 }
           }
