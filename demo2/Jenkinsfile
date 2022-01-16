@@ -3,23 +3,23 @@ node{
     checkout scm
     sh 'echo "ayudaaaa"'
        }
-    stage("build") {
+      stage('SonarQube analysis') {
+    			
+				dir("/var/lib/jenkins/workspace/Tingeso") {
+					withSonarQubeEnv('sonarqube') { // Will pick the global server connection you have configured
+						sh 'chmod +x ./gradlew'
+						sh './gradlew sonarqube'
+    					}
+				
+			}
+  		}
+              stage("build") {
                    sh 'echo "ayudaaaa2"'
                    sh """ docker build --build-arg JAR_FILE=build/libs/\\*.jar -t demo ."""
                    sh 'echo "ayudaaaa3"'
                   
        
          }
-      stage('SonarQube analysis') {
-    			steps {
-				dir("/var/lib/jenkins/workspace/Tingeso") {
-					withSonarQubeEnv('sonarqube') { // Will pick the global server connection you have configured
-						sh 'chmod +x ./gradlew'
-						sh './gradlew sonarqube'
-    					}
-				}
-			}
-  		}
      stage("run") {
                  sh 'docker run -it -p 8081:8081 demo'
                  sh 'echo "ayudaaaa4"'
