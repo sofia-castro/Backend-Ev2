@@ -13,6 +13,12 @@ repositories {
 	mavenCentral()
 }
 
+sonarqube {
+    properties {
+        property "sonar.sourceEncoding", "UTF-8"
+    }
+}
+
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'com.google.code.gson:gson:2.8.5'
@@ -28,6 +34,7 @@ dependencies {
 	testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '3.0.0'
 	implementation 'org.apache.httpcomponents:httpclient:4.5.13'
 	testImplementation 'org.json:json:20140107'
+	project.tasks["sonarqube"].dependsOn "anotherTask"
 
 }
 
