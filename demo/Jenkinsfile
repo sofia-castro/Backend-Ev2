@@ -7,7 +7,7 @@ node{
       stage('SonarQube analysis') {
     			
 				dir("/var/lib/jenkins/workspace/Tingeso/demo") {
-					withSonarQubeEnv('sonarqube') { // Will pick the global server connection you have configured
+					withSonarQubeEnv() { // Will pick the global server connection you have configured
                         //sh 'chmod +x ./gradlew'
                         sh 'gradle sonarqube'
     					}
