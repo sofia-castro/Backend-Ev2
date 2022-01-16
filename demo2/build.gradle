@@ -15,7 +15,7 @@ repositories {
 
 
 
-project.tasks["sonarqube"].dependsOn "anotherTask"
+
 
 sonarqube {
   properties {
