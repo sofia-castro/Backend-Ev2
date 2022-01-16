@@ -3,14 +3,6 @@ node{
     checkout scm
     sh 'echo "ayudaaaa"'
        }
-    
-    stage("Pruebas unitarias"){
-        dir("/var/lib/jenkins/workspace/Tingeso/demo2"){
-            sh 'chmod +x ./gradlew'
-            sh './gradlew test'
-        }
-    }
- 
     stage("build") {
                    sh 'echo "ayudaaaa2"'
                    sh """ docker build --build-arg JAR_FILE=build/libs/\\*.jar -t demo ."""
