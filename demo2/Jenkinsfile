@@ -1,5 +1,6 @@
 pipeline{
     agent any
+    stages {
       stage("Repo"){
     checkout scm
     sh 'echo "ayudaaaa"'
@@ -24,5 +25,6 @@ pipeline{
                  sh 'docker run -it -p 8081:8081 demo'
                  sh 'echo "ayudaaaa4"'
           }
+    }
 
 }
