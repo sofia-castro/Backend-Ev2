@@ -41,6 +41,7 @@ dependencies {
 	testImplementation group: 'io.rest-assured', name: 'rest-assured', version: '3.0.0'
 	implementation 'org.apache.httpcomponents:httpclient:4.5.13'
 	testImplementation 'org.json:json:20140107'
+	tasks.sonarRunner.dependsOn init
 	project.tasks["sonarqube"].dependsOn "anotherTask"
 
 }
