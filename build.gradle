@@ -13,14 +13,13 @@ repositories {
 	mavenCentral()
 }
 
-sonarqube {
-    properties {
-        property "sonar.sourceEncoding", "UTF-8"
-    }
-}
+
+
+project.tasks["sonarqube"].dependsOn "anotherTask"
 
 sonarqube {
   properties {
+	property "sonar.sourceEncoding", "UTF-8"
     property "sonar.projectKey", "franciscavera"
     property "sonar.organization", "franciscavera"
     property "sonar.host.url", "https://sonarcloud.io"
